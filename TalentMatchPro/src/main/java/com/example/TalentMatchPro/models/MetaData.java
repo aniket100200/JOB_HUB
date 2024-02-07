@@ -6,6 +6,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Date;
+import java.util.List;
 
 
 @NoArgsConstructor
@@ -17,5 +18,5 @@ import java.util.Date;
 public class MetaData {
     String author;
     Date creationDate;
-    String keywords;
+    List<String> keywords;
 }

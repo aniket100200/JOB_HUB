@@ -22,9 +22,9 @@ public class Document {
     int id;
     @Column(name="document_name")
     String name;
-    @Column(name="uploaded_by")
-    @JoinColumn
-    User user;
+
+
+
     @Column(name="date")
     @CreationTimestamp
     Date uploadedDate;
@@ -37,5 +37,18 @@ public class Document {
 
     @Column(name="meta_data_string")
     String metaDataString;
+
+    @ManyToOne
+    @JoinColumn
+    User user;
+
+    @ManyToOne
+    @JoinColumn
+    Candidate candidate;
+
+
+    @ManyToOne
+    @JoinColumn
+    JobRecruitment jobRecruitment;
 
 }

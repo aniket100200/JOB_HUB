@@ -1,6 +1,6 @@
 package com.example.TalentMatchPro.models;
 
-import com.example.TalentMatchPro.Enums.ExperienceLevel;
+import com.example.TalentMatchPro.Enums.JobApplicationStatus;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -14,40 +14,44 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table
-public class JobRecruitment {
-     @Id
+@Table(name = "candidate")
+public class Candidate {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    String title;
+    String name;
 
-    String description;
+    String contactNo;
 
-    String skills; //Comma separated value..
+    byte[]resume;
+
+    String skills;
+
+    String exprience;
+
+    String education;
 
     @Enumerated(EnumType.STRING)
-    ExperienceLevel experienceLevel;
+    JobApplicationStatus jobApplicationStatus;
 
-    Double salary;
+    @OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL)
+    List<Document>documentList=new ArrayList<>();
 
     @ManyToOne
     @JoinColumn
-    User  user;
+    JobRecruitment jobRecruitment;
+
+    @OneToOne
+    @JoinColumn
+    User user;
 
     @ManyToOne
     @JoinColumn
     Client client;
 
-    @OneToMany(mappedBy = "jobRecruitment",cascade = CascadeType.ALL)
-    List<Candidate>candidateList=new ArrayList<>();
-
     @ManyToOne
     @JoinColumn
     Agent agent;
-
-    @OneToMany(mappedBy = "jobRecruitment",cascade = CascadeType.ALL)
-    List<Document>documentList=new ArrayList<>();
-
 
 }
